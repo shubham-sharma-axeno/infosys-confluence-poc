@@ -40,6 +40,7 @@ body main .section.banner-carousel-container .default-content-wrapper p {
   justify-content: center;
   z-index: 1;
   align-content: space-evenly;*/
+  z-index: 1;
   font-size: 70px;
     line-height: 0.8;
     margin: 0 0 15px;
@@ -62,6 +63,7 @@ body main .section.banner-carousel-container .default-content-wrapper p {
 */
 
 .banner-carousel .carousel-slide .text-container h2 {
+  opacity: 0.9;
   font-size: 70px;
   line-height: 0.8;
   margin: 0 0 15px;
@@ -84,6 +86,7 @@ body main .section.banner-carousel-container .default-content-wrapper p {
   text-align: center;
   padding: 0 15px;
   width: 100%;*/
+  z-index: 1;
   font-size: 22px;
   line-height: 1.4;
   margin: 0 0 15px;
