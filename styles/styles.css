@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -10,24 +11,30 @@
  * governing permissions and limitations under the License.
  */
 
+ /* font-family: 'Oswald', sans-serif;
+ font-family: 'Poppins', sans-serif; */
+ @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Poppins:wght@200;300;400&display=swap');
+ 
+
  :root {
   /* colors */
   --link-color: #035fe6;
   --link-hover-color: #136ff6;
-  --background-color: #fff;
+  --background-color: #ffffff;
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
-  --text-color: #000;
+  --text-color: #000000;
+  --text-color-white: #ffffff;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback;
+  --body-font-family: 'Oswald', sans-serif;
   --heading-font-family: var(--body-font-family);
-  --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
+  --fixed-font-family: 'Poppins', sans-serif;
 
   /* body sizes */
   --body-font-size-m: 22px;
   --body-font-size-s: 18px;
-  --body-font-size-xs: 16px;
+  --body-font-size-xs: 14px;
 
   /* heading sizes */
   --heading-font-size-xxl: 48px;
@@ -39,40 +46,21 @@
 
   /* nav height */
   --nav-height: 64px;
-
 }
 
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 100.06%;
-  ascent-override: 95%;
-  src: local('Arial');
-}
-
-
-@media (min-width: 900px) {
-  :root {
-    --heading-font-size-xxl: 60px;
-    --heading-font-size-xl: 48px;
-    --heading-font-size-l: 36px;
-    --heading-font-size-m: 30px;
-    --heading-font-size-s: 24px;
-    --heading-font-size-xs: 22px;
-  }
-}
-
-body {
-  font-size: var(--body-font-size-m);
-  margin: 0;
-  font-family: var(--body-font-family);
-  line-height: 1.6;
-  color: var(--text-color);
+body, html {
   background-color: var(--background-color);
-  display: none;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 300;
+  padding: 0;
+  margin: 0;
+  line-height: 1.42857143;
 }
 
 body.appear {
-  display: block;
+  display: unset;
 }
 
 header {
@@ -96,16 +84,27 @@ h4 { font-size: var(--heading-font-size-m) }
 h5 { font-size: var(--heading-font-size-s) }
 h6 { font-size: var(--heading-font-size-xs) }
 
-p, dl, ol, ul, pre, blockquote {
+dl, ol, ul, pre, blockquote {
   margin-top: 1em;
   margin-bottom: 1em;
 }
 
-hr {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-  border: 0;
-  border-bottom: 1px solid var(--overlay-background-color);
+a:any-link {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--link-hover-color);
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+p:empty {
+ display: none;
 }
 
 code, pre, samp {
@@ -121,48 +120,56 @@ pre {
   overflow: scroll;
 }
 
-main pre {
-  background-color: var(--overlay-background-color);
-  padding: 1em;
-  border-radius: .25em;
-  overflow-x: auto;
-  white-space: pre;
-}
-
-a:any-link {
-  color: var(--link-color);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: var(--link-hover-color);
-}
-
 /* buttons */
-a.button:any-link, button {
-  font-family: var(--body-font-family);
+.button-container .button {
+  color: var(--text-color-white);
+  border: 2px solid #ffffff;
+  position: relative;
+  z-index: 1;
   display: inline-block;
-  box-sizing: border-box;
+  background-color: transparent;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  padding: 5px 25px;
+  letter-spacing: 2px;
+  margin: 1.11rem 0;
   text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
-  text-align: center;
-  font-style: normal;
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
-  margin: 16px 0;
-  white-space: nowrap;
+  font-size: 26px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 30px;
+  font-weight: 500;
+  font-family: "tungstenw05-medium", "Oswald", sans-serif;
+  text-transform: uppercase;
 }
-
-a.button:hover, a.button:focus, button:hover, button:focus  {
-  background-color: var(--link-hover-color);
-  cursor: pointer;
+.button-container .button:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 0;
+  width: 100%;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-color);
+  z-index: -1;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.button-container .button:hover,
+.button-container .button:focus {
+  border: 2px solid #ffffff;
+  /*  background-color: transparent;*/
+  color: #000;
+  background-color: var(--background-color);
+  text-decoration: none;
+}
+.button-container .button:hover:before {
+  height: 1000%;
 }
 
 button:disabled, button:disabled:hover {
@@ -174,7 +181,8 @@ a.button.secondary, button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
   color: var(--text-color)
-}
+} 
+
 
 main input {
   font-size: 1.25rem;
@@ -182,7 +190,7 @@ main input {
   max-width: 50rem;
   display: block;
   margin-bottom: 1rem;
-  padding: 0.75rem 0.6rem;
+  padding: 0.75rem 0.6rem;    
   border-radius: 0.25rem;
   box-sizing: border-box;
   border: 1px solid var(--text-color);
@@ -192,6 +200,22 @@ main input {
 
 main input:hover {
   border: 1px solid var(--text-color);
+}
+
+main .section {
+  width: 100%;
+  display: inline-block;
+/*   float: left; */
+  /* padding: 64px 16px; */
+  clear: both;
+}
+
+main pre {
+  background-color: var(--overlay-background-color);
+  padding: 1em;
+  border-radius: .25em;
+  overflow-x: auto;
+  white-space: pre;
 }
 
 main blockquote {
@@ -211,41 +235,252 @@ main blockquote p::after {
   line-height: 0;
 }
 
+hr {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  border: 0;
+  border-bottom: 1px solid var(--overlay-background-color);
+}
+
 main img {
   max-width: 100%;
   width: auto;
   height: auto;
 }
 
-.icon {
-  display: inline-block;
-  height: 24px;
-  width: 24px;
-}
-
-.icon svg {
-  height: 100%;
-  width: 100%;
-}
-
-main .section {
-  padding: 64px 16px;
-}
-
-@media (min-width: 600px) {
+/* @media (min-width: 600px) {
   main .section {
     padding: 64px 32px;
-  }
-}
+  }  
+} */
 
 @media (min-width: 900px) {
-  .section > div {
+  :root {
+    --heading-font-size-xxl: 60px;
+    --heading-font-size-xl: 48px;
+    --heading-font-size-l: 36px;
+    --heading-font-size-m: 30px;
+    --heading-font-size-s: 24px;
+    --heading-font-size-xs: 22px;  
+  }
+  
+  .div-container > div {
     max-width: 1200px;
     margin: auto;
   }
 }
 
-/* section metadata */
-main .section.highlight {
-  background-color: var(--highlight-background-color);
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+
+.bg-light-white {
+  background-color: #f2f2f2 !important;
+}
+main .section.section-nin .button-container .button,
+.position-absolute-center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+
+/* progressive section appearance */
+main .section[data-section-status='loading'],
+main .section[data-section-status='initialized'] {
+  display: none;
+}
+
+/* Section Default */
+main .section h2 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 80px;
+  margin: 0
+}
+@media only screen and (max-width: 1024px) {
+  main .section h2 {
+    font-size: 80px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  main .section h2 {
+    font-size: 50px;
+  }
+}
+
+main .section p {
+  font-family: var(--fixed-font-family);
+  font-size: 18px;
+  /* font-size: var(--heading-font-size-xs); */
+  font-weight: 300;
+}
+
+/* Button */
+main .section .button-container,
+main .section .button-container .button {
+  margin-bottom: 0;
+}
+main .section .button-container .button {
+  border-radius: 0;
+  background: transparent;
+  margin-top: 0;
+  color: #df9926;
+  border-color: #df9926;
+  font-size: 20px;
+}
+main .section .button-container .button:before,
+main .section .button-container .button:hover,
+main .section .button-container .button:focus {
+    background-color: #df9926;
+    color: var(--text-color-white);
+}
+
+/* Slider Section */
+main .section-slider.banner-carousel-container .control-container .prev,
+main .section-slider.banner-carousel-container .control-container .next,
+main .section-slider.banner-carousel-container .carousel-slide picture::before {
+  display: none;
+}
+
+
+/* 1 Section */
+main .div-container.section-one > div {
+  max-width: 930px;
+}
+main .div-container.section-one p {
+  font-size: var(--heading-font-size-s);
+}
+
+
+/* 2 Section */
+main .section.section-two .cards > ul {
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  margin-top: 50px
+} 
+main .section.section-two .cards > ul > li {
+  background-color: #dadada;
+  border: none;
+  font-family: var(--fixed-font-family);
+}
+main .section.section-two .cards > ul > li > .cards-card-body:first-child {
+  font-family: var(--body-font-family);
+  font-size: 35px;
+  margin: 0;
+  text-align: center;
+  background: #f2f2f2;
+  padding-bottom: 10px;
+}
+
+
+/* 3 Section */
+.section.section-thr .columns > div > div:first-child {
+    flex: .5;
+}
+.section.section-thr h3 {
+    font-size: 25px;
+    margin: 0 0 15px;
+}
+.section.section-thr p {
+  font-size: var(--body-font-size-xs);
+}
+.section.section-thr .columns picture {
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+.section.section-thr .columns picture * {
+    height: 100%;
+    width: auto;
+    max-width: none;
+}
+.section.section-thr .columns table {
+  margin-bottom: 35px;
+}
+.section.section-thr .columns table tr {
+    vertical-align: top;
+}
+.section.section-thr .columns table tr ~ tr td {
+  padding: 15px;
+  background-color: #f2f2f2;
+}
+.section.section-thr .columns table tr td {
+  max-width: 210px;
+}
+.section.section-thr .columns table tr td p {
+  margin: 0;
+}
+.section.section-thr .button-container {
+  text-align: center;
+}
+
+
+/* 5 Section */
+main .section.section-fiv h2 {
+  font-size: 70px;
+}
+
+
+/* 6 Section */
+main .section.section-six h2 {
+  font-size: 50px;
+  margin-bottom: 50px
+}
+main .section.section-six ul {
+  font-family: var(--fixed-font-family);
+}
+
+
+/* 8 Section */
+main .section.section-eig.hero-container>div {
+  max-width: 1200px;
+}
+main .section.section-eig.hero-container .hero-content {
+  max-width: 750px;
+  margin: auto;
+}
+main .section.section-eig .hero-content h2 {
+  font-size: 70px;
+}
+main .section.section-eig .button-container .button {
+  color: var(--text-color-white);
+  border-color: #ffffff;
+}
+main .section.section-eig .button-container .button:before,
+main .section.section-eig .button-container .button:hover,
+main .section.section-eig .button-container .button:focus {
+    background-color: var(--background-color);
+    color: #000000; 
+}
+
+/* 9 Section */
+main .section.section-nin.hero-container>div {
+  max-width: 1200px;
+}
+main .section.section-nin.hero-container .hero-wrapper {
+  margin-top: 75px;
+}
+main .section.section-nin .button-container .button {
+ font-family: var(--fixed-font-family);
+ font-size: 18px;
+ color: var(--text-color-white);
+ width: 80px;
+ height: 60px;
+ background-color: rgba(0, 0, 0, 0.8);
+ text-align: center;
+ border-radius: 50px;
+ font-weight: 400;
+ border: transparent;
+ line-height: 28px;
+ padding: 20px 10px;
+ text-transform: capitalize;
 }

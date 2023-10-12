@@ -28,8 +28,6 @@ export function sampleRUM(checkpoint, data = {}) {
         .filter(({ fnname }) => dfnname === fnname)
         .forEach(({ fnname, args }) => sampleRUM[fnname](...args));
     });
-  sampleRUM.always = sampleRUM.always || [];
-  sampleRUM.always.on = (chkpnt, fn) => { sampleRUM.always[chkpnt] = fn; };
   sampleRUM.on = (chkpnt, fn) => { sampleRUM.cases[chkpnt] = fn; };
   defer('observe');
   defer('cwv');
@@ -46,10 +44,10 @@ export function sampleRUM(checkpoint, data = {}) {
       const urlSanitizers = {
         full: () => window.location.href,
         origin: () => window.location.origin,
-        path: () => window.location.href.replace(/\?.*$/, ''),
+        path: () => window.location.pathname,
       };
       // eslint-disable-next-line object-curly-newline, max-len
-      window.hlx.rum = { weight, id, random, isSelected, sampleRUM, sanitizeURL: urlSanitizers[window.hlx.RUM_MASK_URL || 'path'] };
+      window.hlx.rum = { weight, id, random, isSelected, sampleRUM, sanitizeURL: urlSanitizers[window.hlx.RUM_MASK_URL || 'full'] };
     }
     const { weight, id } = window.hlx.rum;
     if (window.hlx && window.hlx.rum && window.hlx.rum.isSelected) {
@@ -75,7 +73,6 @@ export function sampleRUM(checkpoint, data = {}) {
       sendPing(data);
       if (sampleRUM.cases[checkpoint]) { sampleRUM.cases[checkpoint](); }
     }
-    if (sampleRUM.always[checkpoint]) { sampleRUM.always[checkpoint](data); }
   } catch (error) {
     // something went wrong
   }
@@ -83,47 +80,21 @@ export function sampleRUM(checkpoint, data = {}) {
 
 /**
  * Loads a CSS file.
- * @param {string} href URL to the CSS file
+ * @param {string} href The path to the CSS file
  */
-export async function loadCSS(href) {
-  return new Promise((resolve, reject) => {
-    if (!document.querySelector(`head > link[href="${href}"]`)) {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = href;
-      link.onload = resolve;
-      link.onerror = reject;
-      document.head.append(link);
-    } else {
-      resolve();
+export function loadCSS(href, callback) {
+  if (!document.querySelector(`head > link[href="${href}"]`)) {
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('href', href);
+    if (typeof callback === 'function') {
+      link.onload = (e) => callback(e.type);
+      link.onerror = (e) => callback(e.type);
     }
-  });
-}
-
-/**
- * Loads a non module JS file.
- * @param {string} src URL to the JS file
- * @param {Object} attrs additional optional attributes
- */
-
-export async function loadScript(src, attrs) {
-  return new Promise((resolve, reject) => {
-    if (!document.querySelector(`head > script[src="${src}"]`)) {
-      const script = document.createElement('script');
-      script.src = src;
-      if (attrs) {
-      // eslint-disable-next-line no-restricted-syntax, guard-for-in
-        for (const attr in attrs) {
-          script.setAttribute(attr, attrs[attr]);
-        }
-      }
-      script.onload = resolve;
-      script.onerror = reject;
-      document.head.append(script);
-    } else {
-      resolve();
-    }
-  });
+    document.head.appendChild(link);
+  } else if (typeof callback === 'function') {
+    callback('noop');
+  }
 }
 
 /**
@@ -185,17 +156,9 @@ export async function decorateIcons(element) {
           return;
         }
         // Styled icons don't play nice with the sprite approach because of shadow dom isolation
-        // and same for internal references
         const svg = await response.text();
-        if (svg.match(/(<style | class=|url\(#| xlink:href="#)/)) {
-          ICONS_CACHE[iconName] = {
-            styled: true,
-            html: svg
-              // rescope ids and references to avoid clashes across icons;
-              .replaceAll(/ id="([^"]+)"/g, (_, id) => ` id="${iconName}-${id}"`)
-              .replaceAll(/="url\(#([^)]+)\)"/g, (_, id) => `="url(#${iconName}-${id})"`)
-              .replaceAll(/ xlink:href="#([^"]+)"/g, (_, id) => ` xlink:href="#${iconName}-${id}"`),
-          };
+        if (svg.match(/(<style | class=)/)) {
+          ICONS_CACHE[iconName] = { styled: true, html: svg };
         } else {
           ICONS_CACHE[iconName] = {
             html: svg
@@ -213,12 +176,7 @@ export async function decorateIcons(element) {
     }
   }));
 
-  const symbols = Object
-    .keys(ICONS_CACHE).filter((k) => !svgSprite.querySelector(`#icons-sprite-${k}`))
-    .map((k) => ICONS_CACHE[k])
-    .filter((v) => !v.styled)
-    .map((v) => v.html)
-    .join('\n');
+  const symbols = Object.values(ICONS_CACHE).filter((v) => !v.styled).map((v) => v.html).join('\n');
   svgSprite.innerHTML += symbols;
 
   icons.forEach((span) => {
@@ -243,26 +201,22 @@ export async function fetchPlaceholders(prefix = 'default') {
   const loaded = window.placeholders[`${prefix}-loaded`];
   if (!loaded) {
     window.placeholders[`${prefix}-loaded`] = new Promise((resolve, reject) => {
-      fetch(`${prefix === 'default' ? '' : prefix}/placeholders.json`)
-        .then((resp) => {
-          if (resp.ok) {
-            return resp.json();
-          }
-          throw new Error(`${resp.status}: ${resp.statusText}`);
-        }).then((json) => {
-          const placeholders = {};
-          json.data
-            .filter((placeholder) => placeholder.Key)
-            .forEach((placeholder) => {
+      try {
+        fetch(`${prefix === 'default' ? '' : prefix}/placeholders.json`)
+          .then((resp) => resp.json())
+          .then((json) => {
+            const placeholders = {};
+            json.data.forEach((placeholder) => {
               placeholders[toCamelCase(placeholder.Key)] = placeholder.Text;
             });
-          window.placeholders[prefix] = placeholders;
-          resolve();
-        }).catch((error) => {
-          // error loading placeholders
-          window.placeholders[prefix] = {};
-          reject(error);
-        });
+            window.placeholders[prefix] = placeholders;
+            resolve();
+          });
+      } catch (error) {
+        // error loading placeholders
+        window.placeholders[prefix] = {};
+        reject();
+      }
     });
   }
   await window.placeholders[`${prefix}-loaded`];
@@ -432,26 +386,6 @@ export function buildBlock(blockName, content) {
 }
 
 /**
- * Gets the configuration for the given block, and also passes
- * the config through all custom patching helpers added to the project.
- *
- * @param {Element} block The block element
- * @returns {Object} The block config (blockName, cssPath and jsPath)
- */
-function getBlockConfig(block) {
-  const { blockName } = block.dataset;
-  const cssPath = `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`;
-  const jsPath = `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`;
-  const original = { blockName, cssPath, jsPath };
-  return window.hlx.patchBlockConfig
-    .filter((fn) => typeof fn === 'function')
-    .reduce(
-      (config, fn) => fn(config, original),
-      { blockName, cssPath, jsPath },
-    );
-}
-
-/**
  * Loads JS and CSS for a block.
  * @param {Element} block The block element
  */
@@ -459,13 +393,15 @@ export async function loadBlock(block) {
   const status = block.dataset.blockStatus;
   if (status !== 'loading' && status !== 'loaded') {
     block.dataset.blockStatus = 'loading';
-    const { blockName, cssPath, jsPath } = getBlockConfig(block);
+    const { blockName } = block.dataset;
     try {
-      const cssLoaded = loadCSS(cssPath);
+      const cssLoaded = new Promise((resolve) => {
+        loadCSS(`${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`, resolve);
+      });
       const decorationComplete = new Promise((resolve) => {
         (async () => {
           try {
-            const mod = await import(jsPath);
+            const mod = await import(`../blocks/${blockName}/${blockName}.js`);
             if (mod.default) {
               await mod.default(block);
             }
@@ -667,7 +603,6 @@ export function setup() {
   window.hlx.RUM_MASK_URL = 'full';
   window.hlx.codeBasePath = '';
   window.hlx.lighthouse = new URLSearchParams(window.location.search).get('lighthouse') === 'on';
-  window.hlx.patchBlockConfig = [];
 
   const scriptEl = document.querySelector('script[src$="/scripts/scripts.js"]');
   if (scriptEl) {
@@ -684,6 +619,7 @@ export function setup() {
  * Auto initializiation.
  */
 function init() {
+  document.body.style.display = 'none';
   setup();
   sampleRUM('top');
 
