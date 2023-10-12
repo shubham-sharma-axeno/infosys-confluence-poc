@@ -32,16 +32,21 @@ body main .section.banner-carousel-container .default-content-wrapper p {
 }
 
 .banner-carousel .carousel-slide .text-container {
-  position: absolute;
+/*  position: absolute;
   width: 100%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   z-index: 1;
-  align-content: space-evenly;
+  align-content: space-evenly;*/
+  font-size: 70px;
+    line-height: 0.8;
+    margin: 0 0 15px;
+    font-family: "tungstenw05-medium", "Oswald", sans-serif;
 }
 
+/*
 .banner-carousel .carousel-slide .text-container h2 {
   position: relative;
   opacity: 0.9;
@@ -54,6 +59,14 @@ body main .section.banner-carousel-container .default-content-wrapper p {
   font-weight: 400;
   width: 100%;
 }
+*/
+
+.banner-carousel .carousel-slide .text-container h2 {
+  font-size: 70px;
+  line-height: 0.8;
+  margin: 0 0 15px;
+  font-family: "tungstenw05-medium", "Oswald", sans-serif;
+}
 
 .banner-carousel .carousel-slide .text-container h2 strong {
   font-size: var(--heading-font-size-xl);
@@ -63,14 +76,26 @@ body main .section.banner-carousel-container .default-content-wrapper p {
 
 /* stylelint-disable-next-line no-descending-specificity */
 .banner-carousel .carousel-slide .text-container p {
-  position: relative;
+/*  position: relative;
   z-index: 1;
   font-size: var(--body-font-size-xs);
   color: var(--background-color);
   max-width: 300px;
   text-align: center;
   padding: 0 15px;
-  width: 100%;
+  width: 100%;*/
+  font-size: 22px;
+  line-height: 1.4;
+  margin: 0 0 15px;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: myriad-pro, Arial;
+}
+
+//Style for Button
+main .section.section-slider .button-container .button {
+    color: var(--text-color-white);
+    border-color: #ffffff;
 }
 
 .banner-carousel .carousel-slide picture::before {
