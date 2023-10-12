@@ -40,7 +40,10 @@ body main .section.banner-carousel-container .default-content-wrapper p {
   justify-content: center;
   z-index: 1;
   align-content: space-evenly;*/
+  display: flex;
+  flex-wrap: wrap;
   z-index: 1;
+  align-content: space-evenly;
   font-size: 70px;
     line-height: 0.8;
     margin: 0 0 15px;
@@ -64,6 +67,8 @@ body main .section.banner-carousel-container .default-content-wrapper p {
 
 .banner-carousel .carousel-slide .text-container h2 {
   opacity: 0.9;
+  z-index: 1;
+  color: var(--background-color);
   font-size: 70px;
   line-height: 0.8;
   margin: 0 0 15px;
@@ -87,6 +92,9 @@ body main .section.banner-carousel-container .default-content-wrapper p {
   padding: 0 15px;
   width: 100%;*/
   z-index: 1;
+  color: var(--background-color);
+  padding: 0 15px;
+
   font-size: 22px;
   line-height: 1.4;
   margin: 0 0 15px;
