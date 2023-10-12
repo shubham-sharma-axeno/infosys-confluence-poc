@@ -1,39 +1,182 @@
 /* block specific CSS goes here */
 
-main .hero-container > div {
+main .hero-container>div {
   max-width: unset;
+  width: 100%;
 }
-  
+
 main .hero-container {
   padding: 0;
-}
-  
-main .hero {
   position: relative;
-  padding: 32px;
-  min-height: 400px;
 }
 
-main .hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: white;
+main .hero {
+  width: auto;
+  position: relative;
+  overflow: hidden;
+  background: #333;
+  height: 100vh;
+  min-height: 620px;
+  margin-top:-64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: var(--background-color);
 }
 
-main .hero picture {
+main .hero-content {
+  font-family: Oswald, sans-serif;
+  box-sizing: border-box;
+  padding: 0 20px;
+  margin-bottom: 85px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+}
+
+main .hero-content h1 {
+  font-size: 55px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -1.3px;
+  margin :0;
+}
+
+main .hero-content h2 {
+  font-size: 19px;
+  font-weight: 300;
+  margin :0;
+  margin-bottom: 12px;
+  margin-top: 10px;
+  padding-bottom: 0;
+  border: 0;
+  width: 100%;
+  color: #fff;
+}
+
+main .hero-content a:any-link {
+  display: block;
+  font-family: var(--body-font-family);
+  color: var(--background-color);
+  text-align: center;
+  text-decoration: none;
+}
+
+main .hero-content a:nth-of-type(2) {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  padding: 10px;
+}
+
+main .hero-content a[download="download"] {
+  background: unset;
+  font-size: 15px;
+  align-items: center;
+  font-weight: 100;
+  letter-spacing: 0.03em;
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+  align-self: flex-start;
+  padding: 0;
+}
+
+main .hero-content a[download="download"]::before {
+  background-image: url('../../icons/download.svg');
+  width: 20px;
+  background-repeat: no-repeat;
+  height: 20px;
+  margin-inline-end: 8px;
+  content: '';
+}
+
+main .hero picture,
+main .hero .video  {
   position: absolute;
-  z-index: -1;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   object-fit: cover;
   box-sizing: border-box;
+  z-index: 1;
 }
 
-main .hero img {
+main .hero img,
+main .hero video {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  filter: brightness(0.75);
 }
+
+main .hero video[data-screen-desktop] {
+  display: none;
+}
+
+main .hero video[data-screen-mobile] {
+  display: block;
+}
+
+@media screen and (min-width:990px) {
+  main .hero {
+    height: auto;
+    min-height: calc(100vh - 150px);
+  }
+
+  main .hero-content {
+    text-align: center;
+    margin-bottom: 50px;
+    display: block;
+    color: #fff;
+  }
+
+  main .hero-content h1 {
+    font-size: 100px;
+    letter-spacing: -2.3px;
+  }
+
+
+  main .hero-content h2 {
+    font-size: 24px;
+    letter-spacing: -0.6px;
+    font-weight: 300;
+    margin-bottom: 22px;
+    text-align: center;
+    margin-top:16px;
+  }
+
+  main .hero-content a:any-link {
+    margin-top: 0;
+  }
+
+  main .hero-content .button.primary {
+    display: inline-block;
+  }
+
+  main .hero-content a:nth-of-type(2) {
+    margin-top: 10px;
+    padding: 0;
+  }
+
+  main .hero-content a[download="download"] {
+    margin-top: 10px;
+  }
+
+
+  main .hero picture,
+  main .hero .video {
+   z-index : unset
+  }
+
+  main .hero video[data-screen-mobile] {
+    display: none;
+  }
+
+  main .hero video[data-screen-desktop] {
+    display: block;
+  }
+}
+

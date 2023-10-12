@@ -1,0 +1,192 @@
+.section.info-vip.contact-card-container>.contact-card-wrapper {
+  width: 100%;
+  background-color: rgb(0 0 0 / 5%);
+}
+
+.contact-card {
+  padding: 45px;
+  text-align: center;
+}
+
+.contact-card>div {
+  margin-bottom: 30px;
+}
+
+.contact-card a {
+  text-decoration: none;
+}
+
+.contact-card>div.title {
+  font-size: 19px;
+  font-weight: 100;
+}
+
+.contact-card div.title h3 {
+  font-size: 19px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.contact-card div.telephone::before {
+  content: "\e90a";
+  font-family: Real-Madrid-New-Icons, sans-serif;
+  color: var(--icon-primary-color);
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+
+.contact-card div.telephone a {
+  font-size: 23px;
+  font-weight: 100;
+}
+
+.contact-card div.telephone p {
+  font-size: 15px;
+  font-weight: 100;
+  margin: 0;
+}
+
+.contact-card>div.contact>div {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  line-height: normal;
+  padding-bottom: 10px;
+}
+
+.contact-card>div.contact>div>a {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  letter-spacing: -0.3px;
+  font-weight: 100;
+}
+
+@media (max-width: 990px) {
+  .contact-card>div.contact>div>a:first-of-type::before {
+    content: "\e90b";
+    font-family: Real-Madrid-New-Icons, sans-serif;
+    color: var(--icon-primary-color);
+    font-size: 35px;
+    margin-top: 10px;
+    margin-bottom: 6px;
+  }
+
+  .contact-card>div.contact>div>a:last-of-type::before {
+    font-family: Real-Madrid-New-Icons, sans-serif;
+    content: "\e909";
+    width: 28px;
+    height: 28px;
+    background-color: var(--icon-primary-color);
+    color: var(--icon-secondary-color);
+    display: flex;
+    border-radius: 50%;
+    font-size: 23px;
+    margin: 0 auto 10px;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (min-width: 990px) {
+    .section.info-vip.contact-card-container>.contact-card-wrapper {
+        grid-column: 3/4;
+        grid-row: 1/3;
+        max-height: 350px;
+    }
+
+    .contact-card>div.contact>div {
+        justify-content: space-between;
+    }
+
+    .contact-card>div.contact>div>a {
+        font-size: 14px;
+        font-weight: 100;
+        letter-spacing: -0.3px;
+        width: auto;
+    }
+
+    .contact-card div.telephone::before {
+        content: "\e90a";
+        font-family: Real-Madrid-New-Icons, sans-serif;
+        font-size: 29px;
+        color: var(--icon-secondary-color);
+        border-radius: 50%;
+        border: solid 1px var(--icon-primary-color);
+        background-color: var(--icon-primary-color);
+        padding: 5px;
+    }
+
+    /* the home page version */
+    .section.info-vip.homepage.contact-card-container>.contact-card-wrapper {
+        grid-column: 1/5;
+        grid-row: 3/4;
+        width: 100%;
+        max-height: none;
+        display: grid;
+        grid-template-columns: auto 600px 360px auto;
+    }
+
+    .section.info-vip.homepage.contact-card-container>.contact-card-wrapper .contact-card {
+      grid-column: 2/3;
+      padding: 28px 0 15px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .section.info-vip.homepage.contact-card-container>.contact-card-wrapper .contact-card .title {
+      flex-basis: 50%;
+      max-width: 50%;
+      margin-bottom: 25px;
+      display: block;
+    }
+
+    .section.info-vip.homepage.contact-card-container>.contact-card-wrapper .contact-card .title h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .section.info-vip.homepage.contact-card-container>.contact-card-wrapper .contact-card .title h3+p {
+      margin: 0;
+    }
+
+    .section.info-vip.homepage.contact-card-container>.contact-card-wrapper .contact-card .telephone {
+      display: flex;
+      flex-basis: 50%;
+      max-width: 50%;
+      flex-direction: row;
+      box-sizing: border-box;
+      line-height:normal;
+    }
+
+    .section.info-vip.homepage.contact-card-container>.contact-card-wrapper .contact-card .telephone::before {
+      content: "\e90a";
+      font-family: Real-Madrid-New-Icons, sans-serif;
+      color:  var(--icon-primary-color);
+      font-size: 45px;
+      border: 0;
+      background: none;
+    }
+
+    .section.info-vip.homepage.contact-card-container>.contact-card-wrapper .contact-card .contact {
+      flex-basis: 100%;
+      max-width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .section.info-vip.homepage.contact-card-container>.contact-card-wrapper .contact-card .contact > div {
+      margin: 0;
+      padding: 0;
+      gap: 20px;
+    }
+}
+
+@media (min-width: 1200px) {
+      /* the home page version */
+      .section.info-vip.homepage.contact-card-container>.contact-card-wrapper {
+        grid-template-columns: auto 800px 400px auto;
+    }
+}
