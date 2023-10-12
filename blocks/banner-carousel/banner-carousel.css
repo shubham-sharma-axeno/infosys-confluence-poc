@@ -93,7 +93,7 @@ body main .section.banner-carousel-container .default-content-wrapper p {
 }
 
 //Style for Button
-main .section.section-slider .button-container .button {
+.banner-carousel .carousel-slide .text-container .button {
     color: var(--text-color-white);
     border-color: #ffffff;
 }
