@@ -48,7 +48,7 @@ body main .section.banner-carousel-container .default-content-wrapper p {
   align-content: space-evenly;
   font-size: 70px;
     line-height: 0.8;
-    margin: 0 0 15px;
+    margin-top: -50px;
     font-family: "tungstenw05-medium", "Oswald", sans-serif;
     padding-left: 100px;
 }
