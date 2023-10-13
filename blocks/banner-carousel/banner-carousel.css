@@ -50,6 +50,7 @@ body main .section.banner-carousel-container .default-content-wrapper p {
     line-height: 0.8;
     margin: 0 0 15px;
     font-family: "tungstenw05-medium", "Oswald", sans-serif;
+    padding-left: 100px;
 }
 
 /*
@@ -98,12 +99,11 @@ body main .section.banner-carousel-container .default-content-wrapper p {
   z-index: 1;
   color: var(--background-color);
   max-width: 300px;
-  padding: 0 15px;
   width: 100%;
 
   font-size: 22px;
   line-height: 1.4;
-  margin: 0 0 15px;
+  margin-top: -80px;
   box-sizing: border-box;
   color: #fff;
   font-family: myriad-pro, Arial;
