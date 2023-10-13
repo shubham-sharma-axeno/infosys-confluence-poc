@@ -283,6 +283,11 @@ main img {
 .bg-light-white {
   background-color: #f2f2f2 !important;
 }
+
+.bg-dark-orange-1 {
+  background-color: #df9926 !important;
+}
+
 main .section.section-nin .button-container .button,
 .position-absolute-center {
     position: absolute;

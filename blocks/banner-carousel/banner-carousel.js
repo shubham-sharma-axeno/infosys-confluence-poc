@@ -171,9 +171,3 @@ export default function decorate(block) {
   block.innerHTML = carousel.outerHTML + indicatorsHTML;
   initializeScroll(block, cols.length);
 }
-
-function buildBannerWithHeadingAndText(main){
-    const h2 = main.querySelector('h2');
-    const p = main.querySelector('p');
-
-}
