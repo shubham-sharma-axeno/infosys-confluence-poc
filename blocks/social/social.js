@@ -1,4 +1,4 @@
-export default function decorate(block) {
+export default async function decorate(block) {
     // Create the <a> element
     const twitterLink = document.createElement('a');
     twitterLink.classList.add('twitter-timeline');
@@ -14,6 +14,6 @@ export default function decorate(block) {
     twitterScript.setAttribute('charset', 'utf-8');
 
     // Append the elements to the document body
-    document.body.appendChild(twitterLink);
-    document.body.appendChild(twitterScript);
+    block.appendChild(twitterLink);
+    block.appendChild(twitterScript);
 }
