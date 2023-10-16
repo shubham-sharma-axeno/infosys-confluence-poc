@@ -1,4 +1,4 @@
-function createTwitterTimeline() {
+export default function decorate(block) {
     // Create the <a> element
     const twitterLink = document.createElement('a');
     twitterLink.classList.add('twitter-timeline');
