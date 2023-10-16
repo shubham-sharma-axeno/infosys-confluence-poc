@@ -19,5 +19,3 @@ export default async function decorate(block) {
     block.appendChild(twitterLink);
     block.appendChild(twitterScript);
 }
-<a class="twitter-timeline" data-width="1200" data-height="600" href="https://twitter.com/Infosys?ref_src=twsrc%5Etfw">Tweets by Infosys</a>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
