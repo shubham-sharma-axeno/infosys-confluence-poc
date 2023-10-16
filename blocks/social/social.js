@@ -4,7 +4,7 @@ export default async function decorate(block) {
     twitterLink.classList.add('twitter-timeline');
     twitterLink.setAttribute('data-width', '1000');
     twitterLink.setAttribute('data-height', '600');
-    twitterLink.setAttribute('data-chrome', 'noheader, nofooter, transparent, noscrollbar');
+    twitterLink.setAttribute('data-chrome', 'noheader nofooter');
     twitterLink.setAttribute('data-tweet-limit', '4');
     twitterLink.setAttribute('href', 'https://twitter.com/Infosys?ref_src=twsrc%5Etfw');
     twitterLink.textContent = 'Tweets by Infosys';
