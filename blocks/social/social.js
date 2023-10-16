@@ -2,8 +2,10 @@ export default async function decorate(block) {
     // Create the <a> element
     const twitterLink = document.createElement('a');
     twitterLink.classList.add('twitter-timeline');
-    twitterLink.setAttribute('data-width', '1200');
-    twitterLink.setAttribute('data-height', '700');
+    twitterLink.setAttribute('data-width', '1000');
+    twitterLink.setAttribute('data-height', '600');
+    twitterLink.setAttribute('data-chrome', 'noheader, nofooter, transparent, noscrollbar');
+    twitterLink.setAttribute('data-tweet-limit', '4');
     twitterLink.setAttribute('href', 'https://twitter.com/Infosys?ref_src=twsrc%5Etfw');
     twitterLink.textContent = 'Tweets by Infosys';
 
@@ -17,3 +19,5 @@ export default async function decorate(block) {
     block.appendChild(twitterLink);
     block.appendChild(twitterScript);
 }
+<a class="twitter-timeline" data-width="1200" data-height="600" href="https://twitter.com/Infosys?ref_src=twsrc%5Etfw">Tweets by Infosys</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
